@@ -56,14 +56,14 @@ namespace Questao5.Infrastructure.Services.BusinessLogic
             if (contaCorrente == null)
             {
                 houveErro = true;
-                msgRetorno = GetIdempotenciaByTipo(TipoIdempotencia.INVALID_ACCOUNT_POST);
+                msgRetorno = GetIdempotenciaByTipo(TipoIdempotencia.INVALID_ACCOUNT_GET);
             }
             else
             {
                 if (!contaCorrente.Ativo)
                 {
                     houveErro = true;
-                    msgRetorno = GetIdempotenciaByTipo(TipoIdempotencia.INACTIVE_ACCOUNT_POST);
+                    msgRetorno = GetIdempotenciaByTipo(TipoIdempotencia.INACTIVE_ACCOUNT_GET);
                 }
             }
 

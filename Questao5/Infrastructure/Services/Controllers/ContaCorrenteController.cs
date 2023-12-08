@@ -18,6 +18,21 @@ namespace Questao5.Infrastructure.Services.Controllers
             this.logicContaCorrente = logicContaCorrente;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<ResultResponse>> Get(string idContaCorrente)
+        {
+            ResultResponse result = await logicContaCorrente.GetSaldoContaCorrente(idContaCorrente);
+
+            if (!result.HouveErro)
+            {
+                return Ok(result.MensagemRetorno);
+            }
+            else
+            {
+                return BadRequest(result.MensagemRetorno);
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult<ResultResponse>> Post([FromBody] MovimentoRequest request)
         {
