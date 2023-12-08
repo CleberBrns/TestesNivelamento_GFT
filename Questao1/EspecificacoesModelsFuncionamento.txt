@@ -1,0 +1,45 @@
+Classes;
+ 
+
+ContaBancaria
+
+long NumeroConta;
+string NomeTitular;
+decimal Saldo;
+ 
+
+Operacao
+
+long NumeroConta;
+decimal Valor;
+dateTime Data; 
+
+Deposito : Operacao 
+
+Saque : Operacao
+ 
+
+Regras;
+
+1 - Ao cadastrar uma conta, caso um valor inicial não seja informado, conta ficará com "0" 
+
+2 - Uma conta existente só pode ter o NomeTitular alterado 
+
+3 - O Saldo da conta só pode ser alterado por meio de operações(saque/deposito) 
+
+4 - Para cada saque relazido é cobrado o valor de $ 3.50 
+
+5 - Conta ficará negativa, caso saldo não seja suficiente para realizar o saque e/ou pagar a taxa 
+
+6 - Mostrar os dados da conta a cada operação
+ 
+
+Validações; 
+
+1 - Verificar se o numero da conta já existe antes de cadastrar
+
+2 - Caso seja informado que haverá um depósito inicial, validar se o valor do deposito foi informado
+
+3 - Verificar se nome já existe para contas diferentes?
+
+4 -
