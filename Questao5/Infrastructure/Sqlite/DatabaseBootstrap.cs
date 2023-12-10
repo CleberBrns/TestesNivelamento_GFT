@@ -22,7 +22,7 @@ namespace Questao5.Infrastructure.Sqlite
                 return;
 
             connection.Execute("CREATE TABLE contacorrente ( " +
-                               "idcontacorrente TEXT(37) PRIMARY KEY," +
+                               "idcontacorrente TEXT(37) PRIMARY KEY NOT NULL," +
                                "numero INTEGER(10) NOT NULL UNIQUE," +
                                "nome TEXT(100) NOT NULL," +
                                "ativo INTEGER(1) NOT NULL default 0," +
@@ -30,7 +30,7 @@ namespace Questao5.Infrastructure.Sqlite
                                ");");
 
             connection.Execute("CREATE TABLE movimento ( " +
-                "idmovimento TEXT(37) PRIMARY KEY," +
+                "idmovimento TEXT(37) PRIMARY KEY NOT NULL," +
                 "idcontacorrente TEXT(37) NOT NULL," +
                 "datamovimento TEXT(25) NOT NULL," +
                 "tipomovimento TEXT(1) NOT NULL," +
@@ -40,7 +40,7 @@ namespace Questao5.Infrastructure.Sqlite
                 ");");
 
             connection.Execute("CREATE TABLE idempotencia (" +
-                               "chave_idempotencia TEXT(37) PRIMARY KEY," +
+                               "chave_idempotencia TEXT(37) PRIMARY KEY NOT NULL," +
                                "requisicao TEXT(1000)," +
                                "resultado TEXT(1000));");
 
