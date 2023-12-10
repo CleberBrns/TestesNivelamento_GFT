@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Data.Sqlite;
 using Questao5.Domain.Entities;
+using Questao5.Domain.Enumerators;
 
 namespace Questao5.Infrastructure.Sqlite
 {
@@ -13,9 +14,9 @@ namespace Questao5.Infrastructure.Sqlite
             this.databaseConfig = databaseConfig;
         }
 
-        public IEnumerable<Idempotencia> GetAll()
+        public IEnumerable<Idempotencia> GetByTipoRequisicao(TipoRequisicao tipoRequisicao)
         {
-            string query = $"SELECT chave_idempotencia as ChaveIdempotencia, requisicao, resultado FROM idempotencia";
+            string query = $"SELECT chave_idempotencia as ChaveIdempotencia, requisicao, resultado FROM idempotencia WHERE requisicao = '{tipoRequisicao}'";
             using (var connection = new SqliteConnection(databaseConfig.Name))
             {
                 return connection.Query<Idempotencia>(query);

@@ -11,14 +11,10 @@ namespace Questao5.Infrastructure.Services.BusinessLogic
         readonly IDataBaseContaCorrente dataBaseContaCorrente;
         readonly IDataBaseIdempotencia dataBaseIdempotencia;
 
-        IEnumerable<Idempotencia> ListIdempotencia;
-
         public LogicContaCorrente(IDataBaseContaCorrente dataBaseContaCorrente, IDataBaseIdempotencia dataBaseIdempotencia)
         {
             this.dataBaseContaCorrente = dataBaseContaCorrente;
             this.dataBaseIdempotencia = dataBaseIdempotencia;
-
-            ListIdempotencia = dataBaseIdempotencia.GetAll();
         }
 
         /// <summary>
@@ -30,14 +26,14 @@ namespace Questao5.Infrastructure.Services.BusinessLogic
         public async Task<ResultResponse> RegistrarMovimento(MovimentoRequest movimentoRequest)
         {
             bool houveErro = false;
-            string msgRetorno = string.Empty;
-            ListIdempotencia = GetIdempotenciaByTipoRequisicao(TipoRequisicao.MovimentacaoContaCorrente);
+            string msgRetorno;
 
             try
             {
                 ContaCorrente contaCorrente = await dataBaseContaCorrente.GetById(movimentoRequest.IdContaCorrente);
+                IEnumerable<Idempotencia> listIdempotencia = dataBaseIdempotencia.GetByTipoRequisicao(TipoRequisicao.MovimentacaoContaCorrente);
 
-                LogicValidationMovimento validacao = new(contaCorrente, ListIdempotencia);
+                LogicValidationMovimento validacao = new(contaCorrente, listIdempotencia);
                 ResultResponse resultResponse = validacao.ValidarMovimentacao(movimentoRequest);
 
                 if (!resultResponse.HouveErro)
@@ -71,13 +67,14 @@ namespace Questao5.Infrastructure.Services.BusinessLogic
         public async Task<ResultResponse> GetSaldoContaCorrente(string idContaCorrente)
         {
             bool houveErro = false;
-            string msgRetorno = string.Empty;
+            string msgRetorno;
 
             try
             {
                 ContaCorrente contaCorrente = await dataBaseContaCorrente.GetById(idContaCorrente);
+                IEnumerable<Idempotencia> listIdempotencia = dataBaseIdempotencia.GetByTipoRequisicao(TipoRequisicao.ConsultaContaCorrente);
 
-                LogicValidationMovimento validacao = new(contaCorrente, ListIdempotencia);
+                LogicValidationMovimento validacao = new(contaCorrente, listIdempotencia);
                 ResultResponse resultResponse = validacao.ValidarConsultaSaldo();
 
                 if (!resultResponse.HouveErro)
@@ -109,16 +106,6 @@ namespace Questao5.Infrastructure.Services.BusinessLogic
             }
 
             return new ResultResponse(houveErro, msgRetorno);
-        }
-
-        private IEnumerable<Idempotencia> GetIdempotenciaByTipoRequisicao(TipoRequisicao tipoRequisicao)
-        {
-            if (ListIdempotencia != null)
-            {
-                return ListIdempotencia.Where(x => x.Requisicao == tipoRequisicao.ToString());
-            }
-
-            return new List<Idempotencia>();
         }
 
         private decimal CalcularSaldosContaCorrente(IEnumerable<ValorMovimento> valoresMovimentoConta)
