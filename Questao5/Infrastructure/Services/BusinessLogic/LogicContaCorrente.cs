@@ -85,11 +85,11 @@ namespace Questao5.Infrastructure.Services.BusinessLogic
                     {
                         decimal saldoContaCorrente = CalcularSaldosContaCorrente(valoresMovimentoConta);
 
-                        msgRetorno = $"O Saldo da Conta informada é {saldoContaCorrente}";
+                        msgRetorno = $"O Saldo da Conta informada é $ {saldoContaCorrente}";
                     }
                     else
                     {
-                        msgRetorno = "O Saldo da Conta informada é 0.00.";
+                        msgRetorno = "O Saldo da Conta informada é $ 0.00.";
                     }
                 }
                 else

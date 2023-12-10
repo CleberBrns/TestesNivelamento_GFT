@@ -5,6 +5,8 @@
     /// </summary>
     public class Movimento
     {
+        public string IdMovimento { get; set; }
+
         /// <summary>
         /// Identificação única da Conta Corrente
         /// </summary>

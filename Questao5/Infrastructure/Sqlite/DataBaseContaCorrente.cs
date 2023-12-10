@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using Castle.Core.Resource;
+using Dapper;
 using Microsoft.Data.Sqlite;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Utilities;
 using Questao5.Domain.Entities;
@@ -26,17 +27,22 @@ namespace Questao5.Infrastructure.Sqlite
 
         public async Task<string> RegistrarMovimento(Movimento movimento)
         {
+            Guid id = Guid.NewGuid();
+
+            movimento.IdMovimento = id.ToString().ToUpper();
+
             StringBuilder query = new();
-            query.Append("INSERT INTO movimento ");
-            query.Append("(idcontacorrente, datamovimento, tipomovimento, valor) ");
+            query.Append("INSERT INTO [movimento] ");
+            query.Append("(idmovimento, idcontacorrente, datamovimento, tipomovimento, valor) ");
             query.Append("VALUES ");
-            query.Append("(@IdContaCorrente, @DataMovimento, @TipoMovimento, @Valor) ");
-            query.Append("RETURNING idmovimento");
+            query.Append("(@IdMovimento, @IdContaCorrente, @DataMovimento, @TipoMovimento, @Valor)");
 
             using (var connection = new SqliteConnection(databaseConfig.Name))
             {
-                return await connection.ExecuteScalarAsync<string>(query.ToString(), param: movimento);
+                await connection.ExecuteAsync(query.ToString(), movimento);
             }
+
+            return movimento.IdMovimento;
         }
 
         public async Task<IEnumerable<ValorMovimento>> GetValoresMovimentoConta(string idContaCorrente)
