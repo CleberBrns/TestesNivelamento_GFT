@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Questao5</name>
+    </assembly>
+    <members>
+        <member name="P:Questao5.Application.Commands.Requests.ConsultaSaldoRequest.IdContaCorrente">
+            <summary>
+            Identificação única da Conta Corrente
+            </summary>
+        </member>
+        <member name="T:Questao5.Application.Commands.Requests.MovimentoRequest">
+            <summary>
+            Dados para inclusão de um Movimento de Conta Corrente
+            </summary>
+        </member>
+        <member name="P:Questao5.Application.Commands.Requests.MovimentoRequest.IdContaCorrente">
+            <summary>
+            Identificação única da Conta Corrente
+            </summary>
+            <example>FA99D033-7067-ED11-96C6-7C5DFA4A16C9</example>
+        </member>
+        <member name="P:Questao5.Application.Commands.Requests.MovimentoRequest.TipoMovimento">
+            <summary>
+            Tipo do movimento
+            C = crédito, D = débito
+            </summary>
+            <example>crédito</example>
+        </member>
+        <member name="P:Questao5.Application.Commands.Requests.MovimentoRequest.Valor">
+            <summary>
+            Valor do movimento
+            </summary>
+            <example>375.91</example>
+        </member>
+        <member name="T:Questao5.Application.Commands.Responses.ResultResponse">
+            <summary>
+            Objeto de Retorno de uma execução
+            </summary>
+        </member>
+        <member name="P:Questao5.Application.Commands.Responses.ResultResponse.HouveErro">
+            <summary>
+            Indica se ocorreu algum erro durante uma execução
+            </summary>
+        </member>
+        <member name="P:Questao5.Application.Commands.Responses.ResultResponse.MensagemRetorno">
+            <summary>
+            Exibe uma mensagem de acordo com o retorno de uma execução
+            </summary>
+        </member>
+        <member name="T:Questao5.Domain.Entities.ContaCorrente">
+            <summary>
+            Conta Corrente
+            </summary>
+        </member>
+        <member name="P:Questao5.Domain.Entities.ContaCorrente.IdContaCorrente">
+            <summary>
+            Id da Conta Corrente
+            </summary>
+        </member>
+        <member name="P:Questao5.Domain.Entities.ContaCorrente.Numero">
+            <summary>
+            Número da Conta Corrente
+            </summary>
+        </member>
+        <member name="P:Questao5.Domain.Entities.ContaCorrente.Nome">
+            <summary>
+            Nome do Títular da Conta Corrente
+            </summary>
+        </member>
+        <member name="P:Questao5.Domain.Entities.ContaCorrente.Ativo">
+            <summary>
+            Indicativo se Conta está Ativa.
+            (0 = Inativa, 1 = Ativa)
+            </summary>
+        </member>
+        <member name="T:Questao5.Domain.Entities.Movimento">
+            <summary>
+            Movimento Conta Corrente
+            </summary>
+        </member>
+        <member name="P:Questao5.Domain.Entities.Movimento.IdContaCorrente">
+            <summary>
+            Identificação única da Conta Corrente
+            </summary>
+        </member>
+        <member name="P:Questao5.Domain.Entities.Movimento.DataMovimento">
+            <summary>
+            Data do movimento no formato DD/MM/YYYY
+            </summary>
+        </member>
+        <member name="P:Questao5.Domain.Entities.Movimento.TipoMovimento">
+            <summary>
+            Tipo do movimento
+            C = Crédito, D = Débito
+            </summary>
+        </member>
+        <member name="P:Questao5.Domain.Entities.Movimento.Valor">
+            <summary>
+            Valor do movimento
+            </summary>
+        </member>
+        <member name="P:Questao5.Domain.Entities.ValorMovimento.TipoMovimento">
+            <summary>
+            Tipo do movimento
+            C = Crédito, D = Débito
+            </summary>
+        </member>
+        <member name="P:Questao5.Domain.Entities.ValorMovimento.Valor">
+            <summary>
+            Valor do movimento
+            </summary>
+        </member>
+        <member name="M:Questao5.Infrastructure.Services.BusinessLogic.LogicContaCorrente.RegistrarMovimento(Questao5.Application.Commands.Requests.MovimentoRequest)">
+            <summary>
+            Registrar um movimente de uma Conta Corrente
+            </summary>
+            <param name="movimentoRequest"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Questao5.Infrastructure.Services.Controllers.ContaCorrenteController.Get(System.String)">
+            <summary>
+            Retorna o Saldo de uma Conta Corrente
+            </summary>
+            <param name="idContaCorrente">Identificação da Conta Corrente</param>
+            <returns></returns>
+        </member>
+        <member name="M:Questao5.Infrastructure.Services.Controllers.ContaCorrenteController.Post(Questao5.Application.Commands.Requests.MovimentoRequest)">
+            <summary>
+            Registra o Movimento de uma Conta Corrente
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

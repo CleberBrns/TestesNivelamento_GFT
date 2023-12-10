@@ -18,6 +18,11 @@ namespace Questao5.Infrastructure.Services.Controllers
             this.logicContaCorrente = logicContaCorrente;
         }
 
+        /// <summary>
+        /// Retorna o Saldo de uma Conta Corrente
+        /// </summary>
+        /// <param name="idContaCorrente">Identificação da Conta Corrente</param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<ResultResponse>> Get(string idContaCorrente)
         {
@@ -33,6 +38,11 @@ namespace Questao5.Infrastructure.Services.Controllers
             }
         }
 
+        /// <summary>
+        /// Registra o Movimento de uma Conta Corrente
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<ResultResponse>> Post([FromBody] MovimentoRequest request)
         {

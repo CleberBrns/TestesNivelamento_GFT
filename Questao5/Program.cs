@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.OpenApi.Models;
 using Questao5.Infrastructure.Services.BusinessLogic;
 using Questao5.Infrastructure.Sqlite;
 using System.Reflection;
@@ -23,7 +24,19 @@ builder.Services.AddSingleton<ILogicContaCorrente, LogicContaCorrente>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(
+    c =>
+    {
+        c.SwaggerDoc("v1", new OpenApiInfo
+        {
+            Title = "Swagger Documentação Web API - Conta Corrente App",
+            Description = "Documentação da API.",
+            Contact = new OpenApiContact() { Name = "Cleber", Email = "cleber.nsbrito@gmail.com" },
+            License = new OpenApiLicense() { Name = "MIT License", Url = new Uri("https://opensource.org/licenses/MIT") }
+        });
+        c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ContaCorrenteSwaggerAnnotation.xml"));
+    }
+);
 
 var app = builder.Build();
 
